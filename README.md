@@ -8,6 +8,7 @@ O objetivo é apoiar o estudo e a compreensão dos principais conceitos e técni
 ## Estrutura do Repositório
 
 - [`PDMSensors2/`](PDMSensors2/): Exemplo de **uso do acelerômetro** desenvolvido e apresentado em sala de aula.
+- [`imc2/`](imc2/): Código de um App usando **Flutter** para calcular IMC desenvolvido e apresentado em sala de aula.
 
 ---
 
