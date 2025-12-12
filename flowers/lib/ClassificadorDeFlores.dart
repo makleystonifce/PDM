@@ -22,7 +22,6 @@ class Classificadordeflores {
     }
   }
 
-  // PREPROCESSAMENTO CORRETO: [-1, 1]
   List<List<List<double>>> _processImage(img.Image image) {
     final resized = img.copyResize(
       image,
@@ -44,26 +43,21 @@ class Classificadordeflores {
     });
   }
 
-  Future<int> classify(Uint8List bytes) async {
+  Future<List<dynamic>> classify(Uint8List bytes) async {
     await loadModel();
 
     final image = img.decodeImage(bytes);
-    if (image == null) return -1;
+    if (image == null) return List.empty();
 
     final input = _processImage(image)
-        .reshape([1, inputSize, inputSize, 3]);
+          .reshape([1, inputSize, inputSize, 3]);
 
     final outputTensor = _interpreter.getOutputTensors().first;
-    print(outputTensor.toString()+" @@@");
     final numClasses = outputTensor.shape[1];
-    print(numClasses.toString()+" ###@@@");
 
     final output = List.filled(numClasses, 0.0).reshape([1, numClasses]);
-    print(output.toString()+" %%%%@@@");
 
     _interpreter.run(input, output);
-
-    print(output.toString()+" %%%%@@@2222222");
 
     // Pega a classe com maior probabilidade
     double maxValue = -999;
@@ -79,6 +73,6 @@ class Classificadordeflores {
       }
     }
 
-    return maxIndex;
+    return [maxIndex, maxValue];
   }
 }

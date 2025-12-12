@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 
-import 'package:camera/camera.dart';
 import 'package:flowers/ClassificadorDeFlores.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -35,7 +34,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String _classificacao = "";
-  XFile? _photo;
   Uint8List? _photoBytes;
 
   @override
@@ -43,7 +41,10 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        title: Text(widget.title),
+        title: Text(
+            widget.title,
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -91,34 +92,34 @@ class _MyHomePageState extends State<MyHomePage> {
                 final bytes = await photo.readAsBytes();
 
                 setState(() {
-                  _photo = photo;
                   _photoBytes = bytes;
                   _classificacao = "Processando...";
                 });
 
                 // Classificação
                 final classifier = Classificadordeflores();
-                final int classId = await classifier.classify(bytes);
+                final List<dynamic> result = await classifier.classify(bytes);
 
                 setState(() {
-                  switch(classId){
+                  String prop = (result[1] * 100).toStringAsFixed(2) + "%";
+
+                  switch(result[0]){
                     case 0:
-                      _classificacao = "Rosas";
+                      _classificacao = "Rosas ($prop)";
                       break;
                     case 1:
-                      _classificacao = "Tulipas";
+                      _classificacao = "Tulipas ($prop)";
                       break;
                     case 2:
-                      _classificacao = "Margarida";
+                      _classificacao = "Margarida ($prop)";
                       break;
                     case 3:
-                      _classificacao = "Girassois";
+                      _classificacao = "Girassois ($prop)";
                       break;
                     case 4:
-                      _classificacao = "DenteDeLeao";
+                      _classificacao = "Dente De Leão ($prop)";
                       break;
                   }
-                  // _classificacao = classId.toString();
                 });
               },
               icon: const Icon(Icons.camera_alt),

@@ -1,16 +1,12 @@
 # flowers
 
-A new Flutter project.
+Projeto exemplo para classificar flores.
 
-## Getting Started
+Colab com o treinamento do modelo de classficação de flores: https://colab.research.google.com/drive/1gCoiPWajOSY8psbLb962EocFCnMxnvPd?usp=sharing
 
-This project is a starting point for a Flutter application.
+O modelo utilizado neste projeto, embora possa utilizar o gerado pelo Colab acima, foi treinado usando o Teachable Machine com o dataset público.
 
-A few resources to get you started if this is your first Flutter project:
+Outros exemplos do próprio TensorFlow:
+https://www.tensorflow.org/hub/tutorials/image_feature_vector?hl=pt-br
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+https://www.tensorflow.org/tutorials/images/classification?hl=pt-br
